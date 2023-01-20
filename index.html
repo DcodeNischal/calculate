@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anita Dhakal</title>
+    <link
+      rel="shortcut icon"
+      href="https://scontent.fktm16-1.fna.fbcdn.net/v/t39.30808-6/246128300_251302423621572_8309650225523705325_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=x_9PIOYttxcAX-nNGp5&_nc_ht=scontent.fktm16-1.fna&oh=00_AfB8s7QNbtpxXsHwSbX_R0nLoX4oOxoZGg1Tgln8cOaNHA&oe=63D07FA6"
+      type="image/x-icon"
+    />
+
+    <!-- Style -->
+    <style>
+      body {
+        background-color: #000;
+        color: #fff;
+        font-family: "Open Sans", sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+        align-items: center;
+      }
+
+      form {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        margin: 20px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .button {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .result {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px;
+        margin: 20px;
+        background-color: #fff;
+        color: #000;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      .result p {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      img {
+        width: 100%;
+        max-width: 70px;
+        border-radius: 50%;
+      }
+
+      a {
+        color: #fff;
+        text-decoration: none;
+        border: #fff 1px solid;
+        padding: 5px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Title -->
+    <h1>आमा समुह ब्याज (1% ब्यजदर)</h1>
+
+    <!-- Calculate interest using month and money -->
+    <form action="" method="post">
+      <label for="money"
+        >मुद्रा <br /><input type="number" name="money" id="money"
+      /></label>
+      <label for="month"
+        >महिना <br /><input type="number" name="month" id="month"
+      /></label>
+      <input
+        type="submit"
+        class="button"
+        value="गणना गर्नुहोस्"
+        id="calculate"
+      />
+    </form>
+
+    <!-- Display Result i.e. interest amount and total amount -->
+    <div class="result">
+      <p>ब्याज रकम: <span id="interest"></span></p>
+      <p>जम्मा रकम: <span id="total"></span></p>
+    </div>
+
+    <!-- Add total sum and interest of all while doing input -->
+    <div class="result">
+      <h1>सबै जोडेर</h1>
+      <p>जम्मा ब्याज रकम: <span id="totalInterest">0</span></p>
+      <p>जम्मा उठेको रकम (ब्यज बिना): <span id="totalAmount">0</span></p>
+      <p>
+        जम्मा उठेको रकम (ब्यज सहित): <span id="totalAmountWithInterest">0</span>
+      </p>
+    </div>
+
+    <div class="footer">
+      <p>
+        Made with ♡ by
+        <a href="https://nischaldhakal.com.np" target="_blank">Nischal</a>
+      </p>
+    </div>
+
+    <!-- Script -->
+    <script>
+      const interest = document.getElementById("interest");
+      const total = document.getElementById("total");
+
+      document.getElementById("calculate").addEventListener("click", (e) => {
+        e.preventDefault();
+        const totalInterest = parseInt(
+          document.getElementById("totalInterest").innerHTML
+        );
+        const totalAm = parseInt(
+          document.getElementById("totalAmount").innerHTML
+        );
+        const totalAmountWithInterest = parseInt(
+          document.getElementById("totalAmountWithInterest").innerHTML
+        );
+        const money = document.getElementById("money").value;
+        const month = document.getElementById("month").value;
+
+        const interestAmount = money * 0.01 * month;
+        const totalAmount = Number(money) + Number(interestAmount);
+
+        interest.innerHTML = interestAmount;
+        total.innerHTML = totalAmount;
+        document.getElementById("totalInterest").innerHTML =
+          totalInterest + interestAmount;
+        document.getElementById("totalAmount").innerHTML =
+          totalAm + Number(money);
+        document.getElementById("totalAmountWithInterest").innerHTML =
+          totalAmountWithInterest + totalAmount;
+      });
+    </script>
+  </body>
+</html>
