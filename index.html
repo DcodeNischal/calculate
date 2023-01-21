@@ -132,7 +132,8 @@
         padding: 10px;
         border-radius: 5px;
         border: 1px solid red;
-        display: none;
+        visibility: hidden;
+        font-size: 12px;
       }
 
       .footer {
@@ -247,11 +248,11 @@
         error = document.getElementById("error");
         if (checkA === "" || checkB === "" || checkC === "") {
           error.innerHTML = "कृपया सबै फारम भर्नुहोस्";
-          error.style.display = "block";
+          error.style.visibility = "visible";
           return;
         }
 
-        error.style.display = "none";
+        error.style.visibility = "hidden";
 
         const totalInterest = parseInt(
           document.getElementById("totalInterest").innerHTML
@@ -335,6 +336,17 @@
         document.getElementById("moneyonly").innerHTML = "";
         document.getElementById("monthonly").innerHTML = "";
         document.getElementById("interestRateonly").innerHTML = "";
+      });
+
+      /*Hide error while clicking any inputs*/
+      document.getElementById("money").addEventListener("click", () => {
+        error.style.visibility = "hidden";
+      });
+      document.getElementById("month").addEventListener("click", () => {
+        error.style.visibility = "hidden";
+      });
+      document.getElementById("interestRate").addEventListener("click", () => {
+        error.style.visibility = "hidden";
       });
     </script>
   </body>
