@@ -43,6 +43,12 @@
         gap: 20px;
       }
 
+      form input {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #000;
+      }
+
       label {
         display: flex;
         flex-direction: column;
@@ -207,20 +213,21 @@
 
     <!-- Display Result i.e. interest amount and total amount -->
     <div class="result">
-      <p>रकम: <span id="moneyonly"></span></p>
-      <p>महिना: <span id="monthonly"></span></p>
-      <p>ब्याजदर: <span id="interestRateonly"></span></p>
-      <p>ब्याज रकम: <span id="interest"></span></p>
-      <p>जम्मा रकम: <span id="total"></span></p>
+      <p>रकम : <span id="moneyonly"></span></p>
+      <p>महिना : <span id="monthonly"></span></p>
+      <p>ब्याजदर : <span id="interestRateonly"></span></p>
+      <p>ब्याज रकम : <span id="interest"></span></p>
+      <p>जम्मा रकम : <span id="total"></span></p>
     </div>
 
     <!-- Add total sum and interest of all while doing input -->
     <div class="result">
       <h1>सबै जोडेर</h1>
-      <p>जम्मा ब्याज रकम: <span id="totalInterest">0</span></p>
-      <p>जम्मा उठेको रकम (ब्यज बिना): <span id="totalAmount">0</span></p>
+      <p>जम्मा ब्याज रकम : <span id="totalInterest">0</span></p>
+      <p>जम्मा उठेको रकम (ब्यज बिना) : <span id="totalAmount">0</span></p>
       <p>
-        जम्मा उठेको रकम (ब्यज सहित): <span id="totalAmountWithInterest">0</span>
+        जम्मा उठेको रकम (ब्यज सहित) :
+        <span id="totalAmountWithInterest">0</span>
       </p>
     </div>
 
