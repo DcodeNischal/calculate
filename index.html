@@ -11,7 +11,7 @@
       type="image/x-icon"
     />
 
-    <!-- Style -->
+    <!-- CSS -->
     <style>
       body {
         background-color: #000;
@@ -89,15 +89,13 @@
         color: #000;
         border-radius: 5px;
         display: flex;
-        align-items: center;
-        justify-content: center;
         flex-direction: column;
       }
 
       .result p {
         text-align: center;
         display: flex;
-        flex-direction: column;
+        gap: 10px;
       }
 
       img {
@@ -112,29 +110,66 @@
         border: #fff 1px solid;
         padding: 5px 10px;
       }
+
+      .undo-redo {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+        justify-content: center;
+      }
+
+      #undo {
+        background-color: rgb(18, 41, 157);
+        color: rgb(255, 255, 255);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        border: 1px solid #000;
+      }
     </style>
   </head>
+
   <body>
     <!-- Title -->
-    <h1>आमा समुह ब्याज (1% ब्यजदर)</h1>
+    <h1>आमा समुह ब्याज</h1>
 
     <!-- Calculate interest using month and money -->
+
     <form action="" method="post">
       <label for="money"
         >मुद्रा <br /><input type="number" name="money" id="money"
       /></label>
+
       <label for="month"
         >महिना <br /><input type="number" name="month" id="month"
       /></label>
+
+      <label for="interestRate"
+        >ब्यजदर <br /><input
+          type="number"
+          name="interestRate"
+          id="interestRate"
+          value="1"
+      /></label>
+
       <div class="buttons">
         <button class="button" id="calculate">गणना गर्नुहोस्</button>
-        <button class="button" id="reset">मिलाउनुहोस्</button>
         <button class="button" id="delete">सबै हटाउनुहोस्</button>
+      </div>
+
+      <div class="undo-redo">
+        <h3>अगाडीको हिसाब बिग्रीयो ?</h3>
+        <button class="button" id="undo">अगाडिको हिसाब हटाउनुहोस्</button>
       </div>
     </form>
 
     <!-- Display Result i.e. interest amount and total amount -->
     <div class="result">
+      <p>रकम: <span id="moneyonly"></span></p>
+      <p>महिना: <span id="monthonly"></span></p>
+      <p>ब्याजदर: <span id="interestRateonly"></span></p>
       <p>ब्याज रकम: <span id="interest"></span></p>
       <p>जम्मा रकम: <span id="total"></span></p>
     </div>
@@ -149,6 +184,7 @@
       </p>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
       <p>
         Made with ♡ by
@@ -160,7 +196,11 @@
     <script>
       const interest = document.getElementById("interest");
       const total = document.getElementById("total");
+      const moneyonly = document.getElementById("moneyonly");
+      const monthonly = document.getElementById("monthonly");
+      const interestRateonly = document.getElementById("interestRateonly");
 
+      /*Calculate and display result function*/
       document.getElementById("calculate").addEventListener("click", (e) => {
         e.preventDefault();
         const totalInterest = parseInt(
@@ -174,12 +214,18 @@
         );
         const money = document.getElementById("money").value;
         const month = document.getElementById("month").value;
+        const interestRate =
+          document.getElementById("interestRate").value / 100;
 
-        const interestAmount = money * 0.01 * month;
+        const interestAmount = money * interestRate * month;
         const totalAmount = Number(money) + Number(interestAmount);
 
         interest.innerHTML = interestAmount;
         total.innerHTML = totalAmount;
+        moneyonly.innerHTML = money;
+        monthonly.innerHTML = month;
+        interestRateonly.innerHTML = interestRate * 100 + "%";
+
         document.getElementById("totalInterest").innerHTML =
           totalInterest + interestAmount;
         document.getElementById("totalAmount").innerHTML =
@@ -188,12 +234,7 @@
           totalAmountWithInterest + totalAmount;
       });
 
-      document.getElementById("reset").addEventListener("click", (e) => {
-        e.preventDefault();
-        document.getElementById("money").value = "";
-        document.getElementById("month").value = "";
-      });
-
+      /*Delete all input and result*/
       document.getElementById("delete").addEventListener("click", (e) => {
         e.preventDefault();
         document.getElementById("totalInterest").innerHTML = 0;
@@ -203,6 +244,47 @@
         document.getElementById("total").innerHTML = "";
         document.getElementById("money").value = "";
         document.getElementById("month").value = "";
+      });
+
+      /*Undo last input and calculation*/
+
+      document.getElementById("undo").addEventListener("click", (e) => {
+        e.preventDefault();
+
+        /* Check if innerHtml is empty */
+        if (document.getElementById("moneyonly").innerHTML === "") {
+          return;
+        }
+        const totalInterest = parseInt(
+          document.getElementById("totalInterest").innerHTML
+        );
+        const totalAm = parseInt(
+          document.getElementById("totalAmount").innerHTML
+        );
+        const totalAmountWithInterest = parseInt(
+          document.getElementById("totalAmountWithInterest").innerHTML
+        );
+        const money = document.getElementById("moneyonly").innerHTML;
+        const month = document.getElementById("monthonly").innerHTML;
+        const interestRate =
+          parseInt(document.getElementById("interestRateonly").innerHTML) / 100;
+
+        const interestAmount = money * interestRate * month;
+        const totalAmount = Number(money) + Number(interestAmount);
+
+        document.getElementById("totalInterest").innerHTML =
+          totalInterest - interestAmount;
+        document.getElementById("totalAmount").innerHTML =
+          totalAm - Number(money);
+        document.getElementById("totalAmountWithInterest").innerHTML =
+          totalAmountWithInterest - totalAmount;
+        document.getElementById("interest").innerHTML = "";
+        document.getElementById("total").innerHTML = "";
+        document.getElementById("money").value = "";
+        document.getElementById("month").value = "";
+        document.getElementById("moneyonly").innerHTML = "";
+        document.getElementById("monthonly").innerHTML = "";
+        document.getElementById("interestRateonly").innerHTML = "";
       });
     </script>
   </body>
