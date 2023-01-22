@@ -207,7 +207,9 @@
 
       <div class="undo-redo">
         <h3>अगाडीको हिसाब बिग्रीयो ?</h3>
-        <button class="button" id="undo">अगाडिको हिसाब हटाउनुहोस्</button>
+        <button class="button" id="undo">
+          अगाडिको हिसाब हटाउनुहोस् (UNDO)
+        </button>
       </div>
     </form>
 
@@ -260,9 +262,12 @@
           error.innerHTML = "कृपया सबै फारम भर्नुहोस्";
           error.style.visibility = "visible";
           return;
+        } else {
+          error.innerHTML = "गणना भयो ( तल हेर्नुहोस् | )";
+          error.style.visibility = "visible";
+          error.style.color = "green";
+          error.style.border = "green 1px solid";
         }
-
-        error.style.visibility = "hidden";
 
         const totalInterest = parseInt(
           document.getElementById("totalInterest").innerHTML
@@ -293,6 +298,8 @@
           totalAm + Number(money);
         document.getElementById("totalAmountWithInterest").innerHTML =
           totalAmountWithInterest + totalAmount;
+        document.getElementById("money").value = "";
+        document.getElementById("month").value = "";
       });
 
       /*Delete all input and result*/
