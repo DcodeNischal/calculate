@@ -262,7 +262,8 @@
           error.innerHTML = "कृपया सबै फारम भर्नुहोस्";
           error.style.visibility = "visible";
           return;
-        } else {
+        }
+        if (checkA !== "" || checkB !== "" || checkC !== "") {
           error.innerHTML = "गणना भयो ( तल हेर्नुहोस् | )";
           error.style.visibility = "visible";
           error.style.color = "green";
