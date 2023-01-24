@@ -261,6 +261,8 @@
         if (checkA === "" || checkB === "" || checkC === "") {
           error.innerHTML = "कृपया सबै फारम भर्नुहोस्";
           error.style.visibility = "visible";
+          error.style.color = "red";
+          error.style.border = "red 1px solid";
           return;
         }
         if (checkA !== "" || checkB !== "" || checkC !== "") {
